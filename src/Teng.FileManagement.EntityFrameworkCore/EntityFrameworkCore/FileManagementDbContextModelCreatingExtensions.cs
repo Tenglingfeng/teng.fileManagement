@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Teng.FileManagement.Files;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Teng.FileManagement.EntityFrameworkCore
 {
@@ -19,25 +21,18 @@ namespace Teng.FileManagement.EntityFrameworkCore
 
             optionsAction?.Invoke(options);
 
-            /* Configure all entities here. Example:
-
-            builder.Entity<Question>(b =>
+            builder.Entity<File>(b =>
             {
                 //Configure table & schema name
-                b.ToTable(options.TablePrefix + "Questions", options.Schema);
-            
-                b.ConfigureByConvention();
-            
-                //Properties
-                b.Property(q => q.Title).IsRequired().HasMaxLength(QuestionConsts.MaxTitleLength);
-                
-                //Relations
-                b.HasMany(question => question.Tags).WithOne().HasForeignKey(qt => qt.QuestionId);
+                b.ToTable(options.TablePrefix + "Files", options.Schema);
 
-                //Indexes
-                b.HasIndex(q => q.CreationTime);
+                b.ConfigureByConvention();
+
+                //Properties
+                b.Property(q => q.FileName).IsRequired().HasMaxLength(FileConsts.MaxFileNameLength);
+                b.Property(q => q.BlobName).IsRequired().HasMaxLength(FileConsts.MaxBlobNameLength);
+                b.Property(q => q.ByteSize).IsRequired();
             });
-            */
         }
     }
 }

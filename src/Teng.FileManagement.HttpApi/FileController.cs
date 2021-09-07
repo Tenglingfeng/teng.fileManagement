@@ -21,17 +21,17 @@ namespace Teng.FileManagement
         }
 
         [HttpGet]
-        [Route("{name}")]
-        public async Task<FileResult> GetAsync(string name)
+        [Route("{blobName}")]
+        public virtual async Task<FileResult> GetAsync(string blobName)
         {
-            var bytes = await _fileAppService.GetAsync(name);
-            return File(bytes, MimeTypes.GetByExtension(Path.GetExtension(name)));
+            var fileDto = await _fileAppService.FindByBlobNameAsync(blobName);
+            return File(fileDto.Bytes, MimeTypes.GetByExtension(Path.GetExtension(fileDto.FileName)));
         }
 
         [HttpPost]
         [Route("upload")]
-        [AllowAnonymous]
-        public async Task<JsonResult> CreateAsync(IFormFile file)
+        [Authorize]
+        public virtual async Task<JsonResult> CreateAsync(IFormFile file)
         {
             if (file == null)
             {
@@ -39,10 +39,10 @@ namespace Teng.FileManagement
             }
 
             var bytes = await file.GetAllBytesAsync();
-            var result = await _fileAppService.CreateAsync(new FileUploadInputDto()
+            var result = await _fileAppService.CreateAsync(new FileDto()
             {
                 Bytes = bytes,
-                Name = file.FileName
+                FileName = file.FileName
             });
             return Json(result);
         }

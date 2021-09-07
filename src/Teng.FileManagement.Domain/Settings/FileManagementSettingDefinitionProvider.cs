@@ -9,6 +9,10 @@ namespace Teng.FileManagement.Settings
             /* Define module settings here.
              * Use names from FileManagementSettings class.
              */
+
+            context.Add(new SettingDefinition(FileManagementSettings.GroupName),
+                new SettingDefinition(FileManagementSettings.AllowedMaxFileSize, "100000"),
+                new SettingDefinition(FileManagementSettings.AllowedUploadFormats, ".zip,.jpg"));
         }
     }
 }

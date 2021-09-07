@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Teng.FileManagement.Files;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Teng.FileManagement.EntityFrameworkCore
 {
@@ -11,10 +13,11 @@ namespace Teng.FileManagement.EntityFrameworkCore
          * public DbSet<Question> Questions { get; set; }
          */
 
-        public FileManagementDbContext(DbContextOptions<FileManagementDbContext> options) 
+        public DbSet<File> Files { get; set; }
+
+        public FileManagementDbContext(DbContextOptions<FileManagementDbContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

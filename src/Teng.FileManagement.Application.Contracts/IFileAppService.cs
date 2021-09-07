@@ -12,5 +12,9 @@ namespace Teng.FileManagement
         Task<byte[]> GetAsync(string name);
 
         Task<string> CreateAsync(FileUploadInputDto input);
+
+        Task<FileDto> FindByBlobNameAsync(string blobName);
+
+        Task<string> CreateAsync(FileDto input);
     }
 }
