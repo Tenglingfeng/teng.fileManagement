@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Teng.FileManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="3.3.0" />
+    <ProjectReference Include="..\Teng.FileManagement.Domain.Shared\Teng.FileManagement.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
